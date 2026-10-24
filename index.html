@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16">
+<title>AM Studio — Account Center</title>
+<style>
+:root{color-scheme:dark;--bg:#080b16;--panel:#11172a;--line:#28314b;--muted:#9aa6c4;--text:#f4f6ff;--a:#8b5cf6;--b:#22d3ee}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0%,#252052 0,transparent 38%),radial-gradient(ellipse at 100% 20%,#073449 0,transparent 32%),var(--bg);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:auto -120px -180px auto;width:360px;height:360px;border-radius:50%;background:#7c3aed22;filter:blur(70px);pointer-events:none;z-index:-1}font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--text);display:flex;flex-direction:column}
+header{width:min(1080px,92%);margin:0 auto;padding:25px 0;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:.3px}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--a),var(--b));display:grid;place-items:center;color:#080b16;font-weight:900;font-size:20px}.pill{font-size:12px;color:#b7f7ff;border:1px solid #235a70;border-radius:99px;padding:6px 10px}
+main{width:min(1080px,92%);margin:auto;display:grid;grid-template-columns:1.05fr .95fr;gap:38px;align-items:center;padding:32px 0 60px}.eyebrow{color:#67e8f9;text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:2px}.intro h1{font-size:clamp(35px,5vw,60px);line-height:1.04;letter-spacing:-2px;margin:15px 0}.gradient{background:linear-gradient(90deg,#c4b5fd,#67e8f9);-webkit-background-clip:text;background-clip:text;color:transparent}.intro p{color:var(--muted);max-width:490px;font-size:16px}.features{display:grid;gap:12px;margin-top:28px}.feature{display:flex;gap:12px;align-items:center;color:#d9e1fa}.check{width:29px;height:29px;border:1px solid #394567;border-radius:9px;display:grid;place-items:center;color:#67e8f9;flex-shrink:0}
+.card{position:relative;overflow:hidden;border:1px solid #303956;background:linear-gradient(145deg,rgba(22,29,52,.96),rgba(12,17,32,.97));border-radius:25px;padding:27px;box-shadow:0 25px 80px #0006;backdrop-filter:blur(18px);transition:transform .25s ease,border-color .25s ease}
+.card:before{content:"";position:absolute;top:-90px;right:-65px;width:180px;height:180px;border-radius:50%;background:#8b5cf622;filter:blur(8px);pointer-events:none}
+.btn{transition:transform .18s ease,filter .18s ease,box-shadow .18s ease;box-shadow:0 8px 25px #8b5cf622}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 12px 30px #8b5cf633}
+.btn:active{transform:translateY(0) scale(.99)}
+.feature{transition:transform .2s ease}.feature:hover{transform:translateX(4px)}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}.card h2{margin:0 0 5px;font-size:24px}.sub{margin:0 0 23px;color:var(--muted);font-size:14px}.label{display:block;font-size:13px;font-weight:700;margin:0 0 8px}.field{width:100%;padding:14px 15px;border-radius:12px;border:1px solid #37415e;background:#090e1e;color:var(--text);font:inherit;outline:none}.field:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px #8b5cf626}.btn{width:100%;border:0;border-radius:12px;padding:14px 16px;font:inherit;font-weight:800;cursor:pointer;margin-top:14px;background:linear-gradient(100deg,#a78bfa,#67e8f9);color:#0a1020}.btn.secondary{background:#1b2440;color:#e7ecff;border:1px solid #394565;margin-top:9px}.btn:disabled{opacity:.6;cursor:not-allowed}.notice{margin-top:17px;border:1px solid #55442a;background:#2a2116;color:#f6d7a2;padding:12px 13px;border-radius:12px;font-size:12px}.status{display:none;margin-top:17px;padding:13px;border-radius:12px;font-size:13px;overflow-wrap:anywhere}.status.show{display:block}.status.info{background:#101f37;border:1px solid #2d527b;color:#c7e7ff}.status.error{background:#321b25;border:1px solid #74394c;color:#ffc6d3}.status.success{background:#122b26;border:1px solid #286858;color:#baf7dc}.steps{display:grid;gap:10px;margin-top:20px}.step{display:flex;gap:11px;align-items:center;color:#9aa6c4;font-size:13px}.num{border:1px solid #35405e;border-radius:50%;width:25px;height:25px;display:grid;place-items:center;flex-shrink:0}.step.active{color:#f4f6ff}.step.active .num{background:#31245a;border-color:#8b5cf6;color:#ddd6fe}
+footer{width:min(1080px,92%);margin:0 auto;padding:20px 0 27px;border-top:1px solid #202943;color:#7f8aa8;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+@media(max-width:760px){main{grid-template-columns:1fr;gap:28px;padding-top:15px}.intro h1{font-size:42px}.features{margin-top:20px}header{padding:18px 0}.card{padding:22px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">A</div><span>AM STUDIO <span style="color:#8491b2;font-weight:500">/ ACCOUNT CENTER</span></span></div><span class="pill">SECURE UI TEMPLATE</span></header>
+<main>
+<section class="intro">
+<div class="eyebrow">Alight Motion • Account tools</div>
+<h1>Make your workflow<br><span class="gradient">feel effortless.</span></h1>
+<p>Halaman akun dengan tampilan modern untuk membantu pengguna memulai proses verifikasi secara aman. Integrasi akun resmi belum dikonfigurasi.</p>
+<div class="features">
+<div class="feature"><span class="check">✓</span><span>Tampilan responsif untuk Android dan desktop</span></div>
+<div class="feature"><span class="check">✓</span><span>Form email dengan validasi dasar</span></div>
+<div class="feature"><span class="check">✓</span><span>Status proses yang transparan</span></div>
+</div>
+</section>
+<section class="card">
+<h2>Account verification</h2>
+<p class="sub">Masukkan email akun yang ingin kamu kelola.</p>
+<form id="form">
+<label class="label" for="email">Email akun</label>
+<input class="field" id="email" name="email" type="email" placeholder="nama@email.com" autocomplete="email" required>
+<button class="btn" type="submit">Mulai verifikasi <span aria-hidden="true">↗</span></button>
+<button class="btn secondary" type="button" id="reset">Reset form</button>
+</form>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<div class="steps" aria-label="Tahapan">
+<div class="step active"><span class="num">1</span><span>Masukkan email akun</span></div>
+<div class="step"><span class="num">2</span><span>Verifikasi melalui kanal resmi</span></div>
+<div class="step"><span class="num">3</span><span>Periksa status langganan akun</span></div>
+</div>
+<div class="notice"><strong>Catatan keamanan:</strong> Template ini tidak mengirim data ke server, tidak meminta magic link atau idToken, dan tidak membuka akses Premium berbayar. Gunakan aplikasi/situs resmi untuk pengelolaan langganan.</div>
+</section>
+</main>
+<footer><span>AM Studio • UI concept</span><span>Jangan bagikan kode verifikasi atau token akun kepada siapa pun.</span></footer>
+<script>
+const form=document.getElementById('form'),email=document.getElementById('email'),statusBox=document.getElementById('status'),reset=document.getElementById('reset');
+form.addEventListener('submit',e=>{e.preventDefault();if(!email.checkValidity()){email.reportValidity();return;}statusBox.className='status show info';statusBox.textContent='Email sudah diperiksa secara lokal. Integrasi backend resmi belum dipasang, jadi tidak ada email yang dikirim dan tidak ada perubahan pada akun.';});
+reset.addEventListener('click',()=>{form.reset();statusBox.className='status';statusBox.textContent='';email.focus();});
+</script>
+</body>
+</html>
