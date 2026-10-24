@@ -41,12 +41,12 @@ exports.handler = async (event) => {
     );
 
     const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: {
-        shouldCreateUser: false,
-      },
-    });
-
+  email: email.trim(),
+  options: {
+    shouldCreateUser: false,
+    emailRedirectTo: process.env.ALLOWED_ORIGIN,
+  },
+});
     if (error) throw error;
 
     return {
