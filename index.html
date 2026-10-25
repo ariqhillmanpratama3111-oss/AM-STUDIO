@@ -26,9 +26,9 @@ footer{width:min(1080px,92%);margin:0 auto;padding:20px 0 27px;border-top:1px so
 <header><div class="brand"><div class="logo">A</div><span>AM STUDIO <span style="color:#8491b2;font-weight:500">/ ACCOUNT CENTER</span></span></div><span class="pill">SECURE UI TEMPLATE</span></header>
 <main>
 <section class="intro">
-<div class="eyebrow">Alight Motion • Account tools</div>
+<div class="eyebrow">AM Studio • Secure sign-in</div>
 <h1>Make your workflow<br><span class="gradient">feel effortless.</span></h1>
-<p>Halaman akun dengan tampilan modern untuk membantu pengguna memulai proses verifikasi secara aman. Integrasi akun resmi belum dikonfigurasi.</p>
+<p>Pusat login AM Studio yang sederhana dan aman. Masukkan email yang sudah terdaftar untuk menerima tautan login melalui Supabase.</p>
 <div class="features">
 <div class="feature"><span class="check">✓</span><span>Tampilan responsif untuk Android dan desktop</span></div>
 <div class="feature"><span class="check">✓</span><span>Form email dengan validasi dasar</span></div>
@@ -37,7 +37,7 @@ footer{width:min(1080px,92%);margin:0 auto;padding:20px 0 27px;border-top:1px so
 </section>
 <section class="card">
 <h2>Account verification</h2>
-<p class="sub">Masukkan email akun yang ingin kamu kelola.</p>
+<p class="sub">Masukkan email yang terdaftar di AM Studio.</p>
 <form id="form">
 <label class="label" for="email">Email akun</label>
 <input class="field" id="email" name="email" type="email" placeholder="nama@email.com" autocomplete="email" required>
@@ -47,17 +47,63 @@ footer{width:min(1080px,92%);margin:0 auto;padding:20px 0 27px;border-top:1px so
 <div id="status" class="status" role="status" aria-live="polite"></div>
 <div class="steps" aria-label="Tahapan">
 <div class="step active"><span class="num">1</span><span>Masukkan email akun</span></div>
-<div class="step"><span class="num">2</span><span>Verifikasi melalui kanal resmi</span></div>
-<div class="step"><span class="num">3</span><span>Periksa status langganan akun</span></div>
+<div class="step"><span class="num">2</span><span>Buka tautan login dari email</span></div>
+<div class="step"><span class="num">3</span><span>Kembali ke AM Studio</span></div>
 </div>
-<div class="notice"><strong>Catatan keamanan:</strong> Template ini tidak mengirim data ke server, tidak meminta magic link atau idToken, dan tidak membuka akses Premium berbayar. Gunakan aplikasi/situs resmi untuk pengelolaan langganan.</div>
+<div class="notice"><strong>Catatan keamanan:</strong> Halaman ini hanya meminta tautan login untuk akun AM Studio. Tidak ada fitur untuk mengubah status Premium atau melewati pembayaran aplikasi lain. Jangan bagikan tautan login atau kode verifikasi kepada siapa pun.</div>
 </section>
 </main>
-<footer><span>AM Studio • UI concept</span><span>Jangan bagikan kode verifikasi atau token akun kepada siapa pun.</span></footer>
+<footer><span>AM Studio • Account Center</span><span>Jangan bagikan kode verifikasi atau token akun kepada siapa pun.</span></footer>
 <script>
-const form=document.getElementById('form'),email=document.getElementById('email'),statusBox=document.getElementById('status'),reset=document.getElementById('reset');
-form.addEventListener('submit',e=>{e.preventDefault();if(!email.checkValidity()){email.reportValidity();return;}statusBox.className='status show info';statusBox.textContent='Email sudah diperiksa secara lokal. Integrasi backend resmi belum dipasang, jadi tidak ada email yang dikirim dan tidak ada perubahan pada akun.';});
-reset.addEventListener('click',()=>{form.reset();statusBox.className='status';statusBox.textContent='';email.focus();});
+const form = document.getElementById('form');
+const email = document.getElementById('email');
+const statusBox = document.getElementById('status');
+const reset = document.getElementById('reset');
+const submitButton = form.querySelector('button[type="submit"]');
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  if (!email.checkValidity()) {
+    email.reportValidity();
+    return;
+  }
+
+  statusBox.className = 'status show info';
+  statusBox.textContent = 'Mengirim permintaan login…';
+  submitButton.disabled = true;
+
+  try {
+    const response = await fetch('/.netlify/functions/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.value.trim() })
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Permintaan login gagal. Coba lagi nanti.');
+    }
+
+    statusBox.className = 'status show success';
+    statusBox.textContent = result.message ||
+      'Jika email terdaftar, instruksi login akan dikirim melalui email. Periksa juga folder Spam.';
+  } catch (error) {
+    statusBox.className = 'status show error';
+    statusBox.textContent = error.message ||
+      'Tidak dapat terhubung ke server. Periksa koneksi internet lalu coba lagi.';
+  } finally {
+    submitButton.disabled = false;
+  }
+});
+
+reset.addEventListener('click', () => {
+  form.reset();
+  statusBox.className = 'status';
+  statusBox.textContent = '';
+  email.focus();
+});
 </script>
 </body>
-</html>
+                                                                   </html>
